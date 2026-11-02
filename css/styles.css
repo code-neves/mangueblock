@@ -39,6 +39,19 @@ html {
     display: none !important;
 }
 
+/* Utilitário para Acessibilidade em Áudio e Leitores de Tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 body {
     margin: 0;
     padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
@@ -1846,6 +1859,12 @@ main#main > [data-view]:not([hidden]) {
     padding: .2rem .55rem;
     font-size: .76rem;
     box-shadow: 1px 1px 0 var(--ink);
+}
+
+#catalog .chip[aria-pressed="true"] {
+    border-color: rgba(201, 99, 37, .45);
+    background: rgba(233, 120, 47, .12);
+    color: #a94f1c;
 }
 
 #catalog .resbar {

@@ -229,6 +229,9 @@
 
     </div>
 
+    <!-- Região oculta para anunciar as ações via Web Speech API / Leitores de tela -->
+    <div id="anuncio-acao" class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;" aria-live="polite"></div>
+
     <!-- DIÁLOGO ACESSIBILIDADE -->
     <dialog id="ap" aria-labelledby="apt" role="dialog">
         <h2 id="apt">Acessibilidade</h2>
@@ -250,6 +253,7 @@
     <script defer src="js/game.js"></script>
     <script defer src="js/catalog.js"></script>
     <script defer src="js/main.js"></script>
+    <script defer src="js/acessibilidade.js"></script>
 </body>
 
 </html>
