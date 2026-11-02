@@ -56,6 +56,47 @@ body {
     margin: 0;
     padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
     font: 400 1rem/1.55 "Atkinson Hyperlegible", system-ui, -apple-system, sans-serif;
+
+    /* Fundo Manguebeat — 3 camadas independentes */
+    background-color: #F4EBDD;
+    background-image: url('../assets/background/noise_title.svg');
+    background-repeat: repeat;
+    background-size: 64px 64px;
+    background-position: center center;
+}
+
+/* Raízes laterais — fixas ao viewport, não rolam com o conteúdo */
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: clamp(80px, 14vw, 180px);
+    background-image: url('../assets/background/mangue_bg.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::before {
+    left: 0;
+}
+
+body::after {
+    right: 0;
+    transform: scaleX(-1); /* espelha as raízes */
+}
+
+/* Telas muito estreitas: esconder raízes para não competir com o conteúdo */
+@media (max-width: 40rem) {
+    body::before,
+    body::after {
+        width: 50px;
+        opacity: 0.55;
+    }
 }
 
 #bg {
@@ -1462,18 +1503,10 @@ legend {
     --bad: #b94b32;
     --accent: #ed875c;
     --card-shadow: 4px 4px 0 var(--ink);
-
-    /* Shared aquarium colors: koi.js reads these instead of keeping a disconnected light palette. */
-    --koi-ivory: #fff7e9;
-    --koi-coral: #f16f59;
-    --koi-navy: #34435f;
-    --koi-fin: #9aaac5;
-    --koi-water: #9288ee;
-    --koi-gold: #e8b84d;
 }
 
 body {
-    background: var(--bg);
+    background-color: #F4EBDD;
     color: var(--ink);
     font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
 }

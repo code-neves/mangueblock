@@ -15,7 +15,6 @@ const RM = matchMedia('(prefers-reduced-motion:reduce)');
 const ST = {
     fs: 1,
     hc: 0,
-    bg: RM.matches ? 'still' : 'anim',
     mo: 0,
     snd: 0,
     inputMode: 'digital', // 'digital' (na tela) ou 'physical' (cartões / câmera)
@@ -44,15 +43,6 @@ const OPT = [
 [
     [0, 'Padrão'],
 [1, 'Alto'],
-],
-],
-[
-    'bg',
-'Peixes no fundo',
-[
-    ['anim', 'Nadando'],
-['still', 'Parados'],
-['off', 'Desligados'],
 ],
 ],
 [
@@ -112,7 +102,6 @@ function applyST() {
         localStorage.setItem('pp2', JSON.stringify(ST));
     } catch (e) {}
 
-    if (window.koi && typeof koi.kick === 'function') koi.kick();
     if (typeof layout === 'function') layout();
 }
 

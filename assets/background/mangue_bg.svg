@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="220" height="900"
+     viewBox="0 0 220 900"
+     preserveAspectRatio="xMidYMid slice"
+     shape-rendering="crispEdges">
+  <!-- Cor base da "coluna" de raízes — invisível, define área de desenho -->
+  <g fill="#5a4a35" opacity="0.22">
+    <!-- Raiz principal: tronco vertical com "dedos" laterais -->
+    <path d="M 50 0 L 50 180 L 80 180 L 80 340 L 60 340 L 60 520 L 95 520 L 95 700 L 70 700 L 70 900 L 0 900 L 0 0 Z"/>
+    <!-- Raiz secundária: à direita da principal -->
+    <path d="M 155 0 L 155 140 L 185 140 L 185 300 L 165 300 L 165 460 L 195 460 L 195 620 L 170 620 L 170 900 L 145 900 L 145 0 Z"/>
+    <!-- Raiz fina decorativa -->
+    <rect x="210" y="0" width="6" height="900"/>
+    <!-- "Dedos" horizontais (bifurcações) -->
+    <rect x="80" y="230" width="60" height="12"/>
+    <rect x="185" y="370" width="35" height="12"/>
+    <rect x="95" y="560" width="55" height="12"/>
+    <rect x="60" y="750" width="45" height="12"/>
+  </g>
+  <!-- Realce com tom mais claro para dar profundidade -->
+  <g fill="#6d5a45" opacity="0.15">
+    <rect x="60" y="200" width="14" height="120"/>
+    <rect x="165" y="180" width="12" height="100"/>
+  </g>
+</svg>

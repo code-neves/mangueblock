@@ -43,7 +43,6 @@ function show(name) {
     });
 
     if (name === 'catalog') renderCatalog();
-    if (window.koi && typeof koi.kick === 'function') koi.kick();
     if (name === 'play' && typeof layout === 'function') layout();
 }
 

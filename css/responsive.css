@@ -1,0 +1,496 @@
+/* ==========================================================================
+   responsive.css — camada de espaçamento e responsividade do Mangueblock
+   Carregar DEPOIS de css/styles.css. Não altera styles.css: para reverter,
+   remova o <link> correspondente no index.html.
+   ========================================================================== */
+
+/* 1. Tokens de espaçamento: crescem com a altura da janela (vh) em vez de
+      ficarem fixos em ~9px como em styles.css. */
+:root {
+    --sp-1: clamp(0.4rem, 0.3rem + 0.6vh, 0.65rem);
+    --sp-2: clamp(0.7rem, 0.45rem + 1vh, 1.1rem);
+    --sp-3: clamp(1rem, 0.6rem + 1.6vh, 1.6rem);
+    --tap-min: 2.75rem;
+}
+
+@media (max-width: 36rem) {
+    :root {
+        --sp-1: 0.4rem;
+        --sp-2: 0.7rem;
+        --sp-3: 1rem;
+    }
+}
+
+@media (max-height: 34rem) {
+    :root {
+        --sp-1: 0.3rem;
+        --sp-2: 0.5rem;
+        --sp-3: 0.75rem;
+    }
+}
+
+/* 2. Casca da página: respeita as áreas seguras laterais (viewport-fit=cover) */
+body {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+}
+
+.wrap {
+    padding-bottom: var(--sp-2);
+}
+
+.wrap header.site,
+.wrap.is-playing header.site {
+    margin-bottom: var(--sp-2);
+}
+
+@media (min-width: 36.01rem) {
+    .wrap header.site,
+    .wrap.is-playing header.site {
+        gap: var(--sp-1) var(--sp-2);
+        padding-block: var(--sp-1);
+    }
+}
+
+/* 3. Catálogo */
+#catalog {
+    gap: var(--sp-2);
+}
+
+#catalog .catalog-home {
+    gap: var(--sp-3);
+}
+
+#catalog .catalog-heading {
+    padding-block: var(--sp-1);
+}
+
+#catalog .catalog-tools {
+    gap: var(--sp-2);
+    padding-block: var(--sp-2);
+}
+
+#catalog .catalog-years .chips {
+    gap: var(--sp-1);
+}
+
+#catalog #list.theme-grid {
+    gap: var(--sp-3);
+    padding: var(--sp-1) var(--sp-2) var(--sp-3) var(--sp-1);
+}
+
+#catalog #list[data-layout="list"] {
+    gap: var(--sp-2);
+    padding: var(--sp-1) var(--sp-2) var(--sp-3) var(--sp-1);
+}
+
+#catalog #list[data-layout="grid"] .theme-card-copy {
+    gap: var(--sp-1);
+    padding: var(--sp-2) var(--sp-3) var(--sp-3);
+}
+
+#catalog #list[data-layout="list"] .theme-card-copy {
+    padding: var(--sp-2) var(--sp-3);
+}
+
+#catalog .theme-detail {
+    gap: var(--sp-3);
+}
+
+#catalog .theme-stages {
+    gap: var(--sp-2);
+}
+
+#catalog .stage-card {
+    gap: var(--sp-1);
+    padding: var(--sp-2) var(--sp-3);
+}
+
+/* 4. Área de jogo (padding-bottom do painel de missão é preservado: em telas
+      estreitas ele reserva espaço para os botões posicionados de forma absoluta) */
+#play.scratch-layout {
+    gap: var(--sp-2);
+}
+
+#play .scratch-left-workzone,
+#play .scratch-right-stage {
+    gap: var(--sp-2);
+}
+
+#play .scratch-grid {
+    gap: var(--sp-2) var(--sp-3);
+}
+
+#play .panel,
+#play .freeflow-palette-panel {
+    padding: var(--sp-2) var(--sp-3);
+}
+
+#play .mission-info-panel {
+    padding-top: var(--sp-2);
+    padding-inline: var(--sp-3);
+}
+
+#play #guidedEditor {
+    gap: var(--sp-2);
+}
+
+#play #dig .pal {
+    gap: var(--sp-1);
+}
+
+#play #guidedSequencePanel .tray {
+    row-gap: var(--sp-1);
+}
+
+#play .freeflow-editor {
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+}
+
+/* 5. Telas estreitas ou baixas (celular, celular deitado, tablet retrato,
+      notebook com pouca altura): a página inteira do catálogo rola, em vez de
+      espremer a lista de mundos em poucos pixels de altura. */
+@media (max-width: 58rem), (max-height: 46rem) {
+    main#main #catalog {
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    #catalog .catalog-home {
+        flex: 0 0 auto;
+        min-height: auto;
+    }
+
+    #catalog #list.theme-grid,
+    #catalog #list[data-layout="list"] {
+        flex: 0 0 auto;
+        overflow: visible;
+    }
+}
+
+/* 6. Telas de toque: alvos com pelo menos 44px (2.75rem). Os seletores repetem
+      a especificidade das regras originais para que a regra seja aplicada. */
+@media (pointer: coarse) {
+    .btn,
+    .btn.sm,
+    .navb,
+    .chip,
+    .card,
+    .flow-block,
+    .flow-sidebar-toggle,
+    .wrap .logo,
+    #catalog .catalog-years .chip,
+    #play .program-mode-switch .mode-choice,
+    #play .scan-entry-btn,
+    .header-mission-actions .mission-actions button {
+        min-height: var(--tap-min);
+    }
+
+    #catalog .catalog-view-switch button,
+    .wrap .hdr #apb {
+        min-width: var(--tap-min);
+        min-height: var(--tap-min);
+    }
+
+    #catalog .catalog-years .chips {
+        row-gap: var(--sp-1);
+    }
+}
+
+/* 7. Celular deitado: compacta o topo para sobrar área útil */
+@media (max-height: 34rem) and (orientation: landscape) {
+    #landing .hero {
+        padding-block: var(--sp-1);
+    }
+
+    #landing h1 {
+        font-size: clamp(1.6rem, 9vh, 2.4rem);
+    }
+
+    #landing .lead {
+        margin-block: var(--sp-1) var(--sp-2);
+    }
+}
+
+/* Catálogo e detalhamento compartilham uma única área de rolagem. */
+main#main #catalog {
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    scroll-behavior: auto;
+}
+
+#catalog .catalog-home,
+#catalog .theme-detail {
+    flex: 0 0 auto;
+    min-height: auto;
+    overflow: visible;
+}
+
+#catalog #list.theme-grid,
+#catalog #list[data-layout="list"],
+#catalog .theme-stages {
+    flex: 0 0 auto;
+    min-height: auto;
+    overflow: visible;
+    overscroll-behavior: auto;
+}
+
+#catalog .theme-stages {
+    grid-auto-rows: max-content;
+}
+
+/* Tela de jogo: o conteúdo cresce, em vez de comprimir os editores. */
+main#main #play:not([hidden]) {
+    overflow-y: auto;
+    overscroll-behavior-y: auto;
+    scroll-behavior: auto;
+    gap: 1.5rem;
+    padding-bottom: 2rem;
+}
+
+#play .play-topbar {
+    flex: 0 0 auto;
+}
+
+#play .scratch-grid {
+    flex: 0 0 auto;
+    min-height: 0;
+    grid-template-rows: auto auto;
+    align-items: start;
+    gap: 1.5rem;
+    overflow: visible;
+}
+
+#play .scratch-grid.flow-mode {
+    grid-template-rows: auto auto auto auto;
+}
+
+#play #guidedEditor {
+    flex: 0 0 auto;
+    min-height: 0;
+    overflow: visible;
+    gap: 1.5rem;
+}
+
+#play #dig,
+#play .freeflow-palette-panel {
+    max-height: none;
+    overflow: visible;
+}
+
+#play #guidedSequencePanel {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 14rem;
+    overflow: visible;
+}
+
+#play #guidedSequencePanel .tray {
+    flex: 0 0 auto;
+    min-height: 6rem;
+    gap: 0.75rem;
+}
+
+#play #dig .pal {
+    gap: 0.75rem;
+}
+
+#play .panel-header-sub {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+#play .sequence-actions,
+#play .flow-header-actions {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* Evita esticar a moldura do tabuleiro à altura do editor. */
+#play .scratch-grid .scratch-right-stage .stage-panel {
+    height: auto !important;
+}
+
+/* Em telas menores, tabuleiro e programação deixam de disputar largura. */
+@media (max-width: 64rem) {
+    #play .scratch-grid,
+    #play .scratch-grid.flow-mode {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+            "modes"
+            "stage"
+            "controls";
+    }
+
+    #play .scratch-grid.flow-mode {
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-areas:
+            "modes"
+            "stage"
+            "controls"
+            "program"
+            "feedback";
+    }
+
+    #play .scratch-grid .scratch-right-stage {
+        width: 100%;
+        max-width: 42rem;
+        justify-self: center;
+    }
+}
+
+@media (max-width: 36rem) {
+    main#main #play:not([hidden]) {
+        gap: 1.25rem;
+    }
+
+    #play .scratch-grid,
+    #play #guidedEditor {
+        gap: 1.25rem;
+    }
+}
+
+/* Desktop: mapa alinhado ao topo da explicação da missão. */
+@media (min-width: 64.01rem) {
+    main#main #play:not([hidden]) {
+        display: grid;
+        grid-template-columns:
+            minmax(0, 1.08fr)
+            minmax(0, 0.92fr);
+        grid-template-rows: repeat(6, auto);
+        grid-template-areas:
+            "summary  stage"
+            "scanner  stage"
+            "modes    stage"
+            "controls stage"
+            "program  stage"
+            "feedback stage";
+        align-content: start;
+        align-items: start;
+        gap: 1.5rem;
+    }
+
+    /*
+     * Os contêineres continuam no HTML.
+     * Seus filhos passam a participar da grade de #play.
+     */
+    #play .play-topbar,
+    #play .scratch-grid {
+        display: contents;
+    }
+
+    #play .play-topbar > .mission-info-panel {
+        grid-area: summary;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
+
+    #play .play-topbar > .scanner-panel {
+        grid-area: scanner;
+        min-width: 0;
+    }
+
+    #play .program-mode-switch {
+        grid-area: modes;
+        align-self: start;
+    }
+
+    #play #guidedEditor {
+        grid-area: controls;
+        min-width: 0;
+    }
+
+    #play .freeflow-palette-panel {
+        grid-area: controls;
+        min-width: 0;
+    }
+
+    #play .freeflow-board {
+        grid-area: program;
+        min-width: 0;
+    }
+
+    #play .freeflow-footer {
+        grid-area: feedback;
+        min-width: 0;
+    }
+
+    #play .scratch-grid > .scratch-right-stage {
+        grid-area: stage;
+        align-self: start;
+        justify-self: stretch;
+        position: static;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        margin: 0;
+    }
+
+    #play .scratch-grid > .scratch-right-stage > .stage-panel {
+        width: 100%;
+        height: auto !important;
+        min-height: 0;
+        margin: 0;
+    }
+}
+
+/* Mantém o botão de retorno visível no detalhamento dos mundos. */
+#catalog #themeDetail {
+    overflow: visible;
+}
+
+#catalog #themeBack {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 10;
+
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    max-width: 100%;
+    min-height: 2.75rem;
+    margin: 0;
+    padding: 0.7rem 1rem;
+
+    border: 2px solid #a94f1c;
+    border-radius: 0.65rem;
+    background: #fff3e8;
+    color: #79380f;
+    box-shadow: 0 3px 8px rgba(23, 36, 60, 0.16);
+
+    font-size: 0.9rem;
+    line-height: 1.4;
+    text-align: center;
+    cursor: pointer;
+}
+
+#catalog #themeBack:hover {
+    background: #ffe3cc;
+    color: #612b09;
+}
+
+#catalog #themeBack:focus-visible {
+    outline: 3px solid var(--ink, #17243c);
+    outline-offset: 3px;
+}
+
+/* Preserva a legibilidade no modo de alto contraste. */
+:root[data-hc="1"] #catalog #themeBack {
+    border-color: #17243c;
+    background: #ffffff;
+    color: #17243c;
+    box-shadow: none;
+}
+
+:root[data-hc="1"] #catalog #themeBack:hover {
+    background: #17243c;
+    color: #ffffff;
+}

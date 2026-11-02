@@ -11,12 +11,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap"></noscript>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
-    <canvas id="bg" aria-hidden="true"></canvas>
+    <noscript>O Mangueblock precisa de JavaScript ativado para funcionar.</noscript>
     <a class="skip" href="#main">Ir para o conteúdo principal</a>
 
     <div class="wrap">
@@ -57,7 +60,7 @@
 
 
             <!-- 2. CATÁLOGO -->
-            <section id="catalog" data-view hidden data-koi-avoid="light" role="region">
+            <section id="catalog" data-view hidden data-koi-avoid="light" role="region" aria-label="Catálogo de missões">
                 <div id="catalogHome" class="catalog-home">
                     <div class="catalog-heading">
                         <div><p class="eyebrow">MANGUEBLOCK · MISSÕES</p><h1 class="h1s">Aventuras</h1></div>
@@ -99,7 +102,7 @@
 
 
             <!-- 3. ÁREA DE JOGO (GAME FIRST LAYOUT) -->
-            <section id="play" data-view hidden data-koi-avoid="light" class="scratch-layout" role="region">
+            <section id="play" data-view hidden data-koi-avoid="light" class="scratch-layout" role="region" aria-label="Área de jogo">
 
                 <div class="play-topbar">
                     <div class="panel mission-info-panel">
@@ -160,7 +163,7 @@
 
                         <!-- Sequência Atual -->
                         <div class="panel" id="guidedSequencePanel">
-                            <div class="panel-header-sub" style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="panel-header-sub">
                                 <p class="lb">Sua Sequência</p>
                                 <div class="sequence-actions">
                                     <span class="scan-slot" id="scanGuidedSlot"></span>
@@ -233,7 +236,7 @@
     <div id="anuncio-acao" class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;" aria-live="polite"></div>
 
     <!-- DIÁLOGO ACESSIBILIDADE -->
-    <dialog id="ap" aria-labelledby="apt" role="dialog">
+    <dialog id="ap" aria-labelledby="apt">
         <h2 id="apt">Acessibilidade</h2>
         <div id="apf"></div>
         <button class="btn" id="apx">Pronto</button>
@@ -247,7 +250,6 @@
     <script defer src="js/icons.js"></script>
     <script defer src="js/state.js"></script>
     <script defer src="js/audio.js"></script>
-    <script defer src="js/koi.js"></script>
     <script defer src="js/reader-wasm.js"></script>
     <script defer src="js/reader.js"></script>
     <script defer src="js/game.js"></script>
