@@ -195,8 +195,8 @@ function renderThemeDetail(theme) {
     <h1 id="themeTitle">${theme.title}</h1><p>${theme.description}</p>
     <div class="theme-hero-curriculum"><span class="theme-curriculum-axis">${(theme.axes || ['Computação']).join(' · ')}</span>
       <strong>${theme.focus || theme.subtitle}</strong><span class="theme-code-heading">Objetivos BNCC cobertos</span><span class="theme-code-list">${allCodes}</span></div>
-    <span class="theme-hero-count">${stages.length} etapas · dificuldade crescente</span></div>
-    <div class="theme-hero-art">${themeArtwork(theme)}</div>`;
+    <span class="theme-hero-count">${stages.length} etapas · dificuldade crescente</span>
+    </div>`;
   $('themeProgress').textContent = `${completed} de ${stages.length} concluídas`;
   $('themeStages').innerHTML = '';
 
