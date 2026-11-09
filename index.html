@@ -14,7 +14,7 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Space+Mono:wght@400;700&display=swap"></noscript>
-    <link rel="stylesheet" href="css/styles(2).css">
+    <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -48,12 +48,14 @@
             <!-- 1. LANDING PAGE -->
             <section id="landing" data-view role="region" aria-labelledby="hero-title">
                 <div class="hero" data-koi-avoid>
-                    <!-- Elementos decorativos pixelados (aria-hidden via svg()) -->
-                    <span class="hero-deco hero-deco-crab" aria-hidden="true"></span>
-                    <span class="hero-deco hero-deco-antenna" aria-hidden="true"></span>
-                    <span class="hero-deco hero-deco-drum" aria-hidden="true"></span>
-                    <span class="hero-deco hero-deco-mangrove" aria-hidden="true"></span>
-
+                    
+                    <!-- NOVOS ELEMENTOS DE CENA -->
+                    <div class="hero-scenery" aria-hidden="true">
+                        <img src="assets/hero-agua.png" alt="" class="hero-layer hero-water">
+                        <img src="assets/hero-arvore.png" alt="" class="hero-layer hero-tree-left">
+                        <img src="assets/hero-arvore.png" alt="" class="hero-layer hero-tree-right">
+                        <img src="assets/hero-capivara.png" alt="" class="hero-layer hero-capy">
+                    </div>
                     
                     <h1 id="hero-title">Mergulhe no mangue e descubra a programação.</h1>
                     <p class="lead">Escolha uma missão, organize os comandos e veja sua ideia ganhar vida.</p>
@@ -215,10 +217,7 @@
                     <!-- ESQUERDA: WORKZONE -->
                     <div class="scratch-left-workzone">
 
-                        <div class="program-mode-switch" role="group" aria-label="Modo de montar a sequência">
-                            <button class="btn mode-choice active" id="guidedModeBtn" aria-pressed="true">Montagem guiada</button>
-                            <button class="btn mode-choice" id="freeflowModeBtn" aria-pressed="false">Fluxo livre</button>
-                        </div>
+                        
 
                         <div id="guidedEditor" class="mode-editor">
 
@@ -293,6 +292,15 @@
                         </div>
                     </div>
 
+                </div>
+                
+                <!-- NOVA BARRA DE CONTROLES INFERIOR -->
+                <div class="game-bottom-bar">
+                    <div class="program-mode-switch" role="group" aria-label="Modo de montar a sequência">
+                        <button class="btn mode-choice active" id="guidedModeBtn" aria-pressed="true">Montagem guiada</button>
+                        <button class="btn mode-choice" id="freeflowModeBtn" aria-pressed="false">Fluxo livre</button>
+                    </div>
+                
                 </div>
 
             </section>

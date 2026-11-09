@@ -226,10 +226,124 @@ dialog::backdrop { background: rgba(85, 66, 54, 0.6); }
 
 /* ===== Landing Page ===== */
 #landing { display: flex; flex-direction: column; gap: 4rem; padding: 2rem 0; }
-.hero { text-align: center; padding: 4rem 1rem; position: relative; }
-.hero h1 { font-size: clamp(2rem, 5vw, 4rem); color: var(--retro-brown); margin-bottom: 1.5rem; }
-.hero .lead { font-size: 1.25rem; max-width: 600px; margin: 0 auto 2rem; }
-.hero .cta { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+/* ===== Landing Page ===== */
+#landing { display: flex; flex-direction: column; gap: 4rem; padding: 2rem 0; }
+
+/* --- Novo Hero Imersivo (Cena do Mangue) --- */
+.hero { 
+    text-align: center; 
+    padding: 8rem 1rem 10rem; /* Mais espaço em cima e embaixo */
+    position: relative; 
+    overflow: hidden; /* Impede que as árvores vazem para fora */
+    border-bottom: 6px solid var(--retro-brown);
+    /* Fundo base: o Teal da sua paleta */
+    background-color: var(--retro-teal); 
+}
+
+/* Camada de fundo para os elementos decorativos */
+.hero-scenery {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* Permite clicar nos botões mesmo com as imagens por cima */
+    z-index: 1;
+}
+
+.hero-layer {
+    position: absolute;
+    image-rendering: pixelated; /* Mantém os pixels nítidos */
+}
+
+/* Posicionamento e Animação da Água */
+.hero-water {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+/* Posicionamento e Animação das Árvores */
+.hero-tree-left {
+    bottom: 5%;
+    left: -5%;
+    width: 250px;
+    z-index: 2;
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-tree-right {
+    bottom: 2%;
+    right: -5%;
+    width: 300px;
+    z-index: 2;
+    animation: float 5s ease-in-out infinite reverse; /* Movimento invertido */
+}
+
+/* Posicionamento e Animação do Capivara */
+.hero-capy {
+    bottom: 5%;
+    right: 15%;
+    width: 120px;
+    z-index: 3;
+    animation: bounce 3s ease-in-out infinite;
+}
+
+/* Deixando o texto e botão acima da cena */
+.hero h1, .hero .lead, .hero .cta {
+    position: relative;
+    z-index: 10;
+}
+
+.hero h1 { 
+    font-size: clamp(2rem, 5vw, 4rem); 
+    color: var(--retro-brown); 
+    margin-bottom: 1.5rem; 
+    background: var(--retro-cream);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    line-height: 1.2;
+    border: 3px solid var(--retro-brown);
+    box-shadow: 4px 4px 0 var(--retro-brown);
+}
+
+.hero .lead { 
+    font-size: 1.25rem; 
+    max-width: 600px; 
+    margin: 0 auto 2rem; 
+    background: var(--retro-cream);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border: 3px solid var(--retro-brown);
+}
+
+/* Botão */
+.cta-main {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    box-shadow: 6px 6px 0 var(--retro-brown);
+}
+
+/* --- Animações CSS --- */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Acessibilidade: Desliga as animações se o usuário preferir */
+@media (prefers-reduced-motion: reduce) {
+    .hero-tree-left, .hero-tree-right, .hero-capy {
+        animation: none;
+    }
+}
+
 .hero-deco { position: absolute; color: var(--retro-brown); opacity: 0.4; pointer-events: none; }
 
 .landing-section { display: grid; grid-template-columns: 1fr; gap: 2rem; padding: 4rem 0; border-top: 4px dashed var(--retro-brown); }
@@ -827,5 +941,166 @@ a:hover {
 #themeBack:active {
     transform: translate(2px, 2px);
     box-shadow: 0 0 0 var(--retro-brown);
+}
+
+/* ============================================================
+   AJUSTES DO JOGO: BARRA INFERIOR E FLUXO LIVRE
+   ============================================================ */
+
+/* 1. Igualar a altura da coluna de blocos com o tabuleiro */
+#play .scratch-grid {
+    align-items: stretch; /* Força as colunas a terem a mesma altura */
+}
+
+/* 2. Barra Inferior (Rodapé do Jogo) */
+.game-bottom-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--retro-white);
+    border: 4px solid var(--retro-brown);
+    box-shadow: var(--card-shadow);
+}
+
+.game-bottom-bar .program-mode-switch {
+    display: flex;
+    margin: 0;
+    border: 3px solid var(--retro-brown);
+}
+
+.game-bottom-bar .mode-choice {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem;
+    background: transparent;
+    color: var(--retro-brown);
+    text-transform: uppercase;
+}
+
+.game-bottom-bar .mode-choice.active {
+    background: var(--retro-orange);
+    color: var(--retro-white);
+}
+
+.bottom-scan-area {
+    display: flex;
+    gap: 1rem;
+}
+
+/* 3. O Layout do Fluxo Livre (Lado a Lado) */
+#freeflowEditor {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Divide em duas colunas iguais */
+    gap: 1rem; /* Espaço entre a paleta e o quadro */
+    height: 100%;
+}
+
+.freeflow-palette-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Oculta o botão "Blocos" que estava quebrando, mas mantém ele no HTML para o JS funcionar */
+#flowSidebarToggle {
+    display: none; 
+}
+
+.freeflow-sidebar {
+    flex: 1;
+    background: var(--retro-cream);
+    border: 4px solid var(--retro-brown);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.freeflow-board {
+    min-height: 100%;
+    background: var(--retro-olive);
+    border: 4px solid var(--retro-brown);
+    padding: 1rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 4. Centralizar e ajustar os blocos */
+.flow-lane {
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.flow-block {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    justify-content: center; /* Centraliza o texto e o ícone */
+    margin-bottom: 0.5rem;
+}
+
+.flow-block-label {
+    justify-content: center;
+    width: 100%;
+}
+
+/* ============================================================
+   CORREÇÃO DEFINITIVA DO DRAG & DROP (Fim do tremor e Linha Branca)
+   ============================================================ */
+
+/* 1. O Segredo para não tremer: Garantir que o bloco seja o ponto de referência */
+.flow-block {
+    position: relative; /* Necessário para posicionar a linha branca */
+    /* Removemos qualquer transition de transform para não haver atraso visual */
+    transition: box-shadow 0.1s, filter 0.1s; 
+}
+
+/* 2. Área de drop no espaço vazio: A caixa verde inteira aceita o bloco */
+.flow-lane {
+    min-height: 100%; /* Garante que a caixa toda seja área de drop, não só onde tem blocos */
+    align-items: center; /* Centraliza os blocos */
+    padding-bottom: 50px; /* Dá um respiro extra no final para soltar o bloco com facilidade */
+}
+
+/* 3. Destaque sutil no fundo verde quando um bloco está sendo arrastado sobre a área */
+.flow-lane.is-drag-over {
+    background-color: rgba(255, 255, 255, 0.15);
+    outline: 4px dashed var(--retro-white);
+    outline-offset: -10px;
+}
+
+/* 4. Criando a Linha Branca de Indicação (Sem alterar o layout do bloco) */
+.flow-block.drop-before::before,
+.flow-block.drop-after::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: 8px; /* Espessura da linha */
+    background-color: var(--retro-white);
+    border: 3px solid var(--retro-brown); /* Borda marrom para contraste no fundo verde */
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* Brilho ao redor da linha */
+    z-index: 10;
+    pointer-events: none; /* Impede que a linha bloqueie o mouse */
+    border-radius: 4px;
+}
+
+/* 5. Posição da linha (Acima do bloco) */
+.flow-block.drop-before::before {
+    top: -6px; 
+}
+
+/* 6. Posição da linha (Abaixo do bloco) */
+.flow-block.drop-after::after {
+    bottom: -6px;
+}
+
+/* 7. Feedback visual no bloco em si (Apenas uma leve opacidade, sem mover) */
+.flow-block.drop-before,
+.flow-block.drop-after {
+    filter: brightness(0.9); /* Escurece levemente o bloco alvo para destacar a linha */
 }
 
