@@ -124,6 +124,13 @@ if ($('backIcon')) $('backIcon').innerHTML = svg('back', 18);
 
 if (typeof fillIcons === 'function') fillIcons();
 
+/* Ícones decorativos Manguebeat na landing */
+const decoMap = { crab: 180, antenna: 180, drum: 180, mangrove: 196 };
+document.querySelectorAll('.hero-deco').forEach((el) => {
+    const name = [...el.classList].find((c) => c.startsWith('hero-deco-'))?.replace('hero-deco-', '');
+    if (name && decoMap[name]) el.innerHTML = svg(name, decoMap[name]);
+});
+
 /* Inicialização */
 buildCatalog();
 updateXP();
