@@ -27,7 +27,7 @@
     <div class="wrap">
         <!-- CABEÇALHO -->
         <header class="site" data-koi-avoid>
-            <button class="logo" id="logo" aria-label="Mangueblock, ir para o início">
+            <button class="logo home-relief-link" id="logo" aria-label="Mangueblock, ir para o início">
                 <span id="logoMark" aria-hidden="true"></span>
                 <span id="logoText">Mangueblock</span>
             </button>
@@ -45,88 +45,98 @@
 
         <main id="main">
 
-            <!-- 1. LANDING PAGE -->
             <section id="landing" data-view role="region" aria-labelledby="hero-title">
-                <div class="hero" data-koi-avoid>
-                    
-                    <!-- NOVOS ELEMENTOS DE CENA -->
-                    <div class="hero-scenery" aria-hidden="true">
-                        <img src="assets/hero-agua.png" alt="" class="hero-layer hero-water">
-                        <img src="assets/hero-arvore.png" alt="" class="hero-layer hero-tree-left">
-                        <img src="assets/hero-arvore.png" alt="" class="hero-layer hero-tree-right">
-                        <img src="assets/hero-capivara.png" alt="" class="hero-layer hero-capy">
+
+                <div class="landing-content">
+
+                    <div class="hero">
+                        <div class="hero-copy">
+                            <p class="eyebrow">"UM PASSO À FRENTE, E VOCÊ NÃO ESTÁ MAIS NO MESMO LUGAR"</p>
+                            <h1 id="hero-title">MERGULHE NO MANGUE E DESCUBRA A PROGRAMAÇÃO.</h1>
+                            <p class="lead">Aprenda lógica de programação brincando!</p>
+                            <div class="cta">
+                                <button class="btn cta-main" id="start">
+                                    Explorar missões <span aria-hidden="true">→</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="hero-scene" aria-hidden="true">
+                            <img src="assets/assets-sem-fundo/hero-urubu.png" alt="" class="prop bird bird-urubu">
+                            <div class="scene-frame">
+                                <span class="scene-sun" aria-hidden="true"></span>
+                                <img src="assets/assets-sem-fundo/hero-antena.png"     alt="" class="scene-item scene-antena">
+                                <img src="assets/assets-sem-fundo/hero-caranguejo.png" alt="" class="scene-item scene-caranguejo">
+                                <img src="assets/assets-sem-fundo/hero-capivara.png"   alt="" class="scene-item scene-capivara">
+                            </div>
+                        </div>
                     </div>
-                    
-                    <h1 id="hero-title">Mergulhe no mangue e descubra a programação.</h1>
-                    <p class="lead">Escolha uma missão, organize os comandos e veja sua ideia ganhar vida.</p>
-                    <div class="cta">
-                        <button class="btn cta-main" id="start">
-                            Explorar missões <span aria-hidden="true">→</span>
-                        </button>
+
+                    <div class="landing-cards">
+                        <section id="sobre" class="landing-card panel" aria-labelledby="sobre-title">
+                            <p class="eyebrow">SOBRE O PROJETO</p>
+                            <h2 id="sobre-title">Mangueblock</h2>
+                            <p>O projeto une BNCC Computação e muito bairrismo! Inspirado no movimento Manguebeat, transformamos o aprendizado da programação numa aventura pelo bioma recifense!</p>
+                        </section>
+
+                        <section id="fundamentacao" class="landing-card panel" aria-labelledby="fund-title">
+                            <p class="eyebrow">PENSAMENTO COMPUTACIONAL</p>
+                            <h2 id="fund-title">Por que aprender isso?</h2>
+                            <p>Através de blocos interativos, fisícos ou virtuais, as crianças desenvolvem raciocínio lógico e habilidades de resolução de problemas de maneira gamificada e acessível.</p>
+                        </section>
+
+                        <section id="contato" class="landing-card panel" aria-labelledby="contato-title">
+                            <img src="assets/assets-sem-fundo/hero-garca.png" alt="" aria-hidden="true" class="prop bird bird-garca">
+                            <p class="eyebrow">CONTATO</p>
+                            <h2 id="contato-title">Fale conosco!</h2>
+                            <p>Tem dúvidas ou quer levar o Mangueblock para a sua escola? Nossa equipe está de braços abertos (e antenas ligadas) para conversar com você!</p>
+                        </section>
                     </div>
                 </div>
 
-                <!-- SEÇÕES INSTITUCIONAIS -->
-                <section id="sobre" class="landing-section" aria-labelledby="sobre-title">
-                    <div class="landing-section-inner">
-                        <p class="eyebrow">SOBRE O PROJETO</p>
-                        <h2 id="sobre-title">Mangueblock: uma antena parabólica na lama.</h2>
-                        <p class="landing-section-lead">
-                            O Mangueblock nasceu do encontro entre educação, cultura e tecnologia.
-                            Inspirado no movimento Manguebeat — que ergueu uma antena parabólica
-                            no mangue do Recife para dialogar com o mundo — o projeto transforma
-                            blocos de comando, físicos e digitais, em ferramentas para ensinar
-                            pensamento computacional a crianças da Educação Infantil ao 5º ano.
-                        </p>
-                        <p>
-                            Aqui, a criança programa sem depender da tela: monta um algoritmo
-                            com cartões de papel, e a câmera do celular transforma essa
-                            construção em ação no jogo. É a lógica do mangue — enraizada no
-                            concreto, aberta ao mundo.
-                        </p>
+                <!-- Piso: só as casas nos cantos e o mangue no centro -->
+                <div class="landing-floor" aria-hidden="true">
+                    <img src="assets/assets-sem-fundo/hero-casa-3.png"   alt="" class="floor-item house house-l">
+                    <img src="assets/assets-sem-fundo/hero-casa-3.png"   alt="" class="floor-item house house-r">
+                    <img src="assets/assets-sem-fundo/hero-arvore-2.png" alt="" class="floor-item tree-mangue">
+                    <img src="assets/assets-sem-fundo/hero-brennand.png" alt="" class="floor-item brennand">
+                </div>
+
+                <!-- Ponte de pedra: separa o cenário das seções seguintes -->
+                <div class="landing-bridge" aria-hidden="true">
+                    <div class="bridge-deck"><div class="bridge-stone"></div></div>
+                </div>
+
+                <!-- Seção bônus 1: Como funciona -->
+                <section id="como-funciona" class="landing-bonus" aria-labelledby="como-title">
+                    <div class="bonus-inner">
+                        <p class="eyebrow">PASSO A PASSO</p>
+                        <h2 id="como-title">Como o Mangueblock funciona?</h2>
+                        <p class="bonus-lead">Em poucos cliques você escolhe um desafio e começa aprender programação!</p>
+
+                        <div class="bonus-cards">
+                            <article class="bonus-card panel">
+                                <p class="bonus-num" aria-hidden="true">01</p>
+                                <h3>Escolha um mundo</h3>
+                                <p>Cada mundo reúne uma aventura dividida em etapas. Escolha um e avance de uma etapa para a próxima.</p>
+                            </article>
+
+                            <article class="bonus-card panel">
+                                <p class="bonus-num" aria-hidden="true">02</p>
+                                <h3>Monte a sequência</h3>
+                                <p>Analise o desafio, observe os comandos e os organize na ordem certa, seja na montagem guiada ou arrastando blocos no fluxo livre. E mais: também dá para ler cartões físicos com a câmera!</p>
+                            </article>
+
+                            <article class="bonus-card panel">
+                                <p class="bonus-num" aria-hidden="true">03</p>
+                                <h3>Execute e conquiste</h3>
+                                <p>Aperte o botão "Executar" para ver o Chiquinho seguir seus comandos. Se travar, peça uma dica e conquiste estrelas a cada missão.</p>
+                            </article>
+                        </div>
                     </div>
                 </section>
 
-                <section id="fundamentacao" class="landing-section" aria-labelledby="fund-title">
-                    <div class="landing-section-inner">
-                        <p class="eyebrow">FUNDAMENTAÇÃO</p>
-                        <h2 id="fund-title">Por que pensamento computacional na escola?</h2>
-                        <p class="landing-section-lead">
-                            O projeto está alinhado à <strong>BNCC Computação</strong> (2022) e
-                            organiza suas missões em torno de quatro eixos: Pensamento Computacional,
-                            Mundo Digital, Cultura Digital e Responsabilidade e Cidadania.
-                        </p>
-                        <ul class="landing-list">
-                            <li><strong>11 mundos</strong> e <strong>53 etapas</strong> com progressão de dificuldade pensada por faixa etária.</li>
-                            <li>Cada etapa exige o uso de um <strong>bloco específico</strong> para vencer — não basta "chegar à bandeira".</li>
-                            <li>A proposta é <strong>desplugada na origem</strong>: cartões físicos permitem montar algoritmos sem tela.</li>
-                            <li>O leitor digital (câmera ou foto) traduz a construção física para o ambiente virtual.</li>
-                        </ul>
-                        <p>
-                            A escolha por <strong>mangue, caranguejo, maracatu e antena parabólica</strong>
-                            não é decorativa: é uma forma de ancorar o aprendizado em referenciais
-                            culturais próximos às crianças brasileiras.
-                        </p>
-                    </div>
-                </section>
-
-                <section id="contato" class="landing-section" aria-labelledby="contato-title">
-                    <div class="landing-section-inner">
-                        <p class="eyebrow">CONTATO</p>
-                        <h2 id="contato-title">Fale com a equipe</h2>
-                        <p>
-                            Projeto desenvolvido em grupo como protótipo pedagógico.
-                            Para parcerias, dúvidas ou sugestões:
-                        </p>
-                        <ul class="landing-contact-list">
-                            <li><strong>E-mail:</strong> <a href="mailto:contato@mangueblock.example">contato@mangueblock.example</a></li>
-                            <li><strong>Repositório:</strong> <a href="https://github.com/" rel="noopener noreferrer" target="_blank">github.com/mangueblock/prototipo</a></li>
-                            <li><strong>Licença dos sprites:</strong> Sprout Lands — Cup Nooble (consultar <code>ASSET_CREDITS.md</code>)</li>
-                        </ul>
-                    </div>
-                </section>
             </section>
-
 
             <!-- 2. CATÁLOGO -->
             <section id="catalog" data-view hidden data-koi-avoid="light" role="region" aria-label="Catálogo de missões">
@@ -308,6 +318,39 @@
         </main>
 
     </div>
+
+        <!-- RODAPÉ DO SITE -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <button class="footer-logo home-relief-link" data-go="landing" aria-label="Ir para o início">
+                    Mangueblock
+                </button>
+                <p>Transformando a educação, resgatando a cultura!</p>
+            </div>
+
+            <nav class="footer-links" aria-label="Navegação do Rodapé">
+                <h3>Navegação</h3>
+                <ul>
+                    <li><button class="footer-link" data-go="landing">Início</button></li>
+                    <li><button class="footer-link" data-go="catalog">Missões</button></li>
+                </ul>
+            </nav>
+
+            <div class="footer-contact">
+                <h3>Contato</h3>
+                <p>contato@mangueblock.com.br</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram do Mangueblock">Instagram</a>
+                    <a href="#" aria-label="GitHub do Mangueblock">GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mangueblock. Feito no mangue. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
     <!-- Região oculta para anunciar as ações via Web Speech API / Leitores de tela -->
     <div id="anuncio-acao" class="sr-only" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;" aria-live="polite"></div>
