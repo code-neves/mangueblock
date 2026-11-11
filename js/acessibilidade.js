@@ -119,56 +119,110 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================================================
-    // EVENTOS DE NAVEGAÇÃO E CLIQUES 
+    // EVENTOS DE NAVEGAÇÃO, CLIQUES E HOVER (COM DELAY DE 0.9s)
     // =========================================================================
-    document.addEventListener('focusin', (e) => {
-        if (!vozAtiva) return; 
+    
+    let timeoutHover = null;
+    
+    // Seletores de texto que queremos que sejam lidos
+    const selectorTexto = 'p, h1, h2, h3, h4, h5, h6, span, a, button, li, label, .card, .flow-block, .navb, .chip, .mission, .eyebrow, .theme-code, .stage-skill, .stage-description';
+
+    // Função que extrai o texto limpo do elemento
+    const extrairTexto = (alvo) => {
+        let textoParaLer = alvo.getAttribute('aria-label') || alvo.getAttribute('title') || alvo.innerText;
+        if (!textoParaLer && alvo.value) textoParaLer = alvo.value;
         
-        const alvo = e.target;
-        if (alvo.matches('.card, .flow-block, .btn, .navb, .chip, .mission')) {
-            let textoParaLer = '';
-
-            if (alvo.id === 'hint') {
-                textoParaLer = 'Dica';
-            } else if (alvo.id === 'go' || alvo.id === 'flowGo' || alvo.classList.contains('execute-btn')) {
-                textoParaLer = 'Executar';
-            } else {
-                textoParaLer = alvo.getAttribute('aria-label') || alvo.getAttribute('title') || alvo.innerText;
-                if (textoParaLer) {
-                    textoParaLer = removerEmojis(textoParaLer).replace(/\s+/g, ' ').trim();
-                }
-            }
-            
-            if (textoParaLer) falarTexto(textoParaLer);
+        if (textoParaLer) {
+            return removerEmojis(textoParaLer).replace(/\s+/g, ' ').trim();
         }
-    });
+        return '';
+    };
 
-    document.addEventListener('click', (e) => {
-        const alvo = e.target.closest('.card, .flow-block, .btn');
-        if (!alvo) return;
+    // Função central que decide o que falar
+    const executarLeitura = (alvo, isClick = false) => {
+        if (!vozAtiva) return;
 
+        // 1. Caso especial: Botão de Dica
         if (alvo.id === 'hint') {
-            setTimeout(() => {
+            if (isClick) {
                 const elementoDica = document.getElementById('hx');
                 if (elementoDica && elementoDica.innerText) {
                     const textoLimpo = elementoDica.innerText.replace(/\s+/g, ' ').trim();
                     falarTexto("A dica é: " + textoLimpo);
+                } else {
+                    falarTexto("Dica");
                 }
-            }, 150);
+            } else {
+                falarTexto("Dica");
+            }
             return;
         }
 
-        if (vozAtiva && alvo.closest('#pal, #flowPalette')) {
-            let nomeComando = alvo.getAttribute('aria-label') || alvo.innerText;
-            nomeComando = removerEmojis(nomeComando).replace(/\s+/g, ' ').trim();
+        const texto = extrairTexto(alvo);
+        if (!texto) return;
 
-            const mensagem = `${nomeComando} adicionado à sequência.`;
+        // 2. Caso especial: Blocos de comando sendo adicionados (Apenas se for clique)
+        if (isClick && alvo.closest('#pal, #flowPalette')) {
+            const mensagem = `${texto} adicionado à sequência.`;
             falarTexto(mensagem);
-            
             if (anuncioAcao) {
                 anuncioAcao.textContent = mensagem;
                 setTimeout(() => { anuncioAcao.textContent = ''; }, 1000);
             }
+        } else {
+            // 3. Leitura normal (Hover ou clique em outros textos)
+            falarTexto(texto);
         }
+    };
+
+    // --- 1. Leitura por Foco (Teclado) ---
+    // Teclado é imediato, pois o usuário pressionou Tab intencionalmente
+    document.addEventListener('focusin', (e) => {
+        if (!vozAtiva) return;
+        if (e.target === document.body) return;
+        
+        const alvo = e.target.closest(selectorTexto);
+        if (alvo) {
+            clearTimeout(timeoutHover); // Cancela o timer do mouse se estiver pendente
+            executarLeitura(alvo, false);
+        }
+    });
+
+    // --- 2. Leitura por Hover (Passar o mouse) ---
+    document.addEventListener('mouseover', (e) => {
+        if (!vozAtiva) return;
+        
+        const alvo = e.target.closest(selectorTexto);
+        if (alvo) {
+            // Limpa o timer anterior para não haver conflito de áudios
+            clearTimeout(timeoutHover);
+            
+            // Inicia o delay de 0.9 segundos (900ms)
+            timeoutHover = setTimeout(() => {
+                executarLeitura(alvo, false);
+            }, 900);
+        }
+    });
+
+    // --- 3. Cancelar o áudio se o mouse sair do elemento rápido ---
+    document.addEventListener('mouseout', (e) => {
+        const alvo = e.target.closest(selectorTexto);
+        if (alvo) {
+            clearTimeout(timeoutHover);
+        }
+    });
+
+    // --- 4. Leitura por Clique ---
+    document.addEventListener('click', (e) => {
+        const alvo = e.target.closest(selectorTexto);
+        if (!alvo) return;
+
+        // Limpa o timeout do hover para não disparar duas vezes
+        clearTimeout(timeoutHover);
+        
+        // Aplica o mesmo delay de 0.9s para o clique
+        timeoutHover = setTimeout(() => {
+            executarLeitura(alvo, true);
+        }, 900);
     });
 });
